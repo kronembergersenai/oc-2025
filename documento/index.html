@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Documentos - OC2025</title>
+    <link rel="stylesheet" href="documento.css">
+</head>
+<body>
+    <div class="container">
+        <div id="loginScreen" class="login-box">
+            <h2>🔐 Acesso ao Sistema</h2>
+            <p>Digite a senha:</p>
+            <input type="password" id="passwordInput" placeholder="Senha">
+            <button onclick="login()">Entrar</button>
+            <div id="loginError" class="error" style="display:none;"></div>
+        </div>
+        <div id="mainScreen" class="main-content">
+            <h1>📁 Gerenciador de Documentos</h1>
+            
+            <h3>➕ Adicionar Documento</h3>
+            <input type="text" id="title" placeholder="Título do documento" required>
+            <textarea id="description" placeholder="Descrição"></textarea>
+            <input type="url" id="link" placeholder="https://..." required>
+            <button onclick="addDocument()">Adicionar</button>
+            <div id="addMessage"></div>
+            <h3>📄 Documentos</h3>
+            <div id="documentsList"></div>
+        </div>
+    </div>
+    <script>
+        const URL = 'https://script.google.com/macros/s/AKfycbxoP3Lqx5dKnEIJhtYvzS_KrmHHc3NXr3q6hahIuwFdn-oyWdJfBNetcANzXvH-Si1Q/exec';
+        async function login() {
+            const password = document.getElementById('passwordInput').value;
+            try {
+                const response = await fetch(`${URL}?action=verifyPassword&password=${password}`);
+                const result = await response.text();
+                
+                if (result.trim() === 'true') {
+                    document.getElementById('loginScreen').style.display = 'none';
+                    document.getElementById('mainScreen').style.display = 'block';
+                    loadDocuments();
+                } else {
+                    document.getElementById('loginError').textContent = 'Senha incorreta!';
+                    document.getElementById('loginError').style.display = 'block';
+                }
+            } catch (error) {
+                document.getElementById('loginError').textContent = 'Erro de conexão: ' + error.message;
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+        async function loadDocuments() {
+            try {
+                const response = await fetch(`${URL}?action=getDocuments`);
+                const documents = await response.json();
+                
+                const list = document.getElementById('documentsList');
+                list.innerHTML = '';
+                
+                if (documents.length === 0) {
+                    list.innerHTML = '<p>Nenhum documento encontrado.</p>';
+                    return;
+                }
+                documents.forEach(doc => {
+                    const div = document.createElement('div');
+                    div.className = 'document';
+                    div.innerHTML = `
+                        <h4>${doc.title}</h4>
+                        <p>${doc.description}</p>
+                        <a href="${doc.link}" target="_blank">🔗 Abrir</a>
+                        <button onclick="deleteDoc(${doc.id})" style="float:right; background:red;">❌</button>
+                    `;
+                    list.appendChild(div);
+                });
+            } catch (error) {
+                document.getElementById('documentsList').innerHTML = '<p class="error">Erro ao carregar: ' + error.message + '</p>';
+            }
+        }
+        async function addDocument() {
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const link = document.getElementById('link').value;
+            if (!title || !link) {
+                alert('Preencha título e link!');
+                return;
+            }
+            try {
+                const formData = new FormData();
+                formData.append('action', 'addDocument');
+                formData.append('title', title);
+                formData.append('description', description);
+                formData.append('link', link);
+                formData.append('createdAt', new Date().toLocaleDateString('pt-BR'));
+                const response = await fetch(URL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.text();
+                
+                if (result.includes('success')) {
+                    document.getElementById('addMessage').innerHTML = '<div class="success">✅ Documento adicionado!</div>';
+                    document.getElementById('title').value = '';
+                    document.getElementById('description').value = '';
+                    document.getElementById('link').value = '';
+                    loadDocuments();
+                } else {
+                    document.getElementById('addMessage').innerHTML = '<div class="error">❌ Erro: ' + result + '</div>';
+                }
+            } catch (error) {
+                document.getElementById('addMessage').innerHTML = '<div class="error">❌ Erro de conexão: ' + error.message + '</div>';
+            }
+        }
+        async function deleteDoc(id) {
+            if (!confirm('Excluir documento?')) return;
+            try {
+                const formData = new FormData();
+                formData.append('action', 'deleteDocument');
+                formData.append('id', id);
+                const response = await fetch(URL, {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.text();
+                if (result.includes('success')) {
+                    loadDocuments();
+                } else {
+                    alert('Erro ao excluir: ' + result);
+                }
+            } catch (error) {
+                alert('Erro de conexão: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
