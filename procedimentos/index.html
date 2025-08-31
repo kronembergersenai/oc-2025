@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olimpíadas do Conhecimento SENAI - Petrópolis</title>
+    <link rel="stylesheet" href="procedimentos.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <!-- Placeholder para logo da Firjan -->
+            <div style="width: 120px; height: 60px; background: rgba(255,255,255,0.2); margin: 0 auto 1rem; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                FIRJAN
+            </div>
+            <h1 class="olimpiadas-title">OLIMPÍADAS DO CONHECIMENTO</h1>
+            <p class="subtitle">SENAI Petrópolis - Centro de Referência em Eletricidade</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="modalidades-section">
+            <h2 class="section-title">Modalidades de Competição</h2>
+            <div class="modalidades-grid">
+                <div class="modalidade-card">
+                    <div class="modalidade-number">#18</div>
+                    <div class="modalidade-title">INSTALAÇÕES PREDIAIS</div>
+                    <p>Instalações elétricas residenciais e prediais com foco em infraestrutura, eletrodutos e circuitos terminais</p>
+                </div>
+                <div class="modalidade-card">
+                    <div class="modalidade-number">#19</div>
+                    <div class="modalidade-title">CONTROLE INDUSTRIAL</div>
+                    <p>Montagem de quadros de comando, fiação de circuitos de potência e controle industrial</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="info-cards">
+            <div class="info-card">
+                <h3>Procedimentos</h3>
+                <div class="stats">11</div>
+                <p>Procedimentos técnicos detalhados</p>
+            </div>
+            <div class="info-card">
+                <h3>Tolerâncias</h3>
+                <div class="stats">±2-3mm</div>
+                <p>Precisão nas medições</p>
+            </div>
+            <div class="info-card">
+                <h3>Modalidades</h3>
+                <div class="stats">2</div>
+                <p>Áreas de competição</p>
+            </div>
+        </section>
+        
+        <section class="procedimentos-section">
+            <h2 class="section-title">📋 Procedimentos de Trabalho</h2>
+            <p>Clique em cada procedimento para ver os detalhes técnicos completos:</p>
+            
+            <div class="procedimentos-grid" id="procedimentosGrid">
+                <!-- Os procedimentos serão inseridos via JavaScript -->
+            </div>
+        </section>
+    </div>
+    
+    <!-- Modal para exibir detalhes dos procedimentos -->
+    <div id="procedimentoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Dados dos procedimentos baseados no documento
+        const procedimentos = [
+            {
+                numero: "01",
+                titulo: "Locação de Elementos e Traçados",
+                descricao: "Marcação e traçado do percurso da infraestrutura elétrica",
+                detalhes: `
+                    <h3>PT Nº 01 - LOCAÇÃO DE ELEMENTOS E TRAÇADOS DO PERCURSO DA INFRAESTRUTURA</h3>
+                    
+                    <h4>1. LOCAÇÃO DOS ELEMENTOS DA INFRAESTRUTURA</h4>
+                    <ul>
+                        <li>Marque os pontos de fixação dos elementos da instalação (quadros, caixas e abraçadeiras), conforme indicado no layout</li>
+                        <li>Utilize lápis e metro articulado para as medições</li>
+                    </ul>
+                    
+                    <div class="tolerancias">
+                        <strong>Tolerâncias:</strong><br>
+                        • Medidas ≤ 500mm: tolerância de ±2mm<br>
+                        • Medidas > 500mm: tolerância de ±3mm
+                    </div>
+                    
+                    <h4>2. TRAÇADO DO PERCURSO DA INFRAESTRUTURA</h4>
+                    <ul>
+                        <li>Trace o percurso da infraestrutura utilizando régua ou linha de bater</li>
+                        <li>Fixe pregos nos pontos de entrada e/ou saída de eletrodutos das caixas e quadro</li>
+                    </ul>
+                    
+                    <h5>Traçado com linha de bater:</h5>
+                    <ul>
+                        <li>Escolha a cor desejada, coloque no recipiente e chacoalhe o carretel</li>
+                        <li>Estique a linha entre os pregos e arqueie por 10 cm, depois solte</li>
+                    </ul>
+                    
+                    <h5>Traçado com régua:</h5>
+                    <ul>
+                        <li>Encoste a régua nos pregos e risque com lápis o percurso</li>
+                        <li>Confira o alinhamento em prumo e nível</li>
+                    </ul>
+                `
+            },
+            {
+                numero: "02",
+                titulo: "Montagem de Eletrodutos PVC",
+                descricao: "Montagem da infraestrutura de eletrodutos de PVC",
+                detalhes: `
+                    <h3>PT Nº 02 - MONTAGEM DE INFRAESTRUTURA DE ELETRODUTOS DE PVC</h3>
+                    
+                    <h4>Procedimento:</h4>
+                    <ul>
+                        <li>Monte os conectores (boxes e/ou adaptadores) nas caixas e quadros</li>
+                        <li>Fixe as caixas, quadros e abraçadeiras nos pontos indicados no projeto</li>
+                        <li>Meça todos os trechos retos da infraestrutura a partir do interior dos conectores</li>
+                        <li>Corte os eletrodutos perpendicularmente ao seu eixo e escareie suas extremidades</li>
+                        <li>Meça todos os trechos em curva e execute as curvaturas necessárias</li>
+                        <li>Monte a rede de eletrodutos e faça os ajustes necessários</li>
+                        <li>Verifique o alinhamento em nível e prumo da tubulação e caixas</li>
+                    </ul>
+                    
+                    <div class="tolerancias">
+                        <strong>Tolerâncias:</strong><br>
+                        • Medidas de 0 até 500mm: ±2mm<br>
+                        • Medidas de 501mm ou mais: ±3mm<br>
+                        • Nível e Prumo: Dentro da marcação, no máximo tangenciando a linha demarcada no bulbo<br>
+                        • Conexões: Extremidade dos eletrodutos completamente dentro dos conectores
+                    </div>
+                `
+            },
+            {
+                numero: "03",
+                titulo: "Curvar Eletrodutos PVC",
+                descricao: "Técnicas para curvatura de eletrodutos de PVC",
+                detalhes: `
+                    <h3>PT Nº 03 - CURVAR ELETRODUTOS DE PVC</h3>
+                    
+                    <h4>Procedimento:</h4>
+                    <ul>
+                        <li>Meça as distâncias "X" e "Y" a partir do interior dos conectores</li>
+                        <li>Determine o comprimento do tubo a ser cortado e marque o trecho a ser curvado</li>
+                        <li>Selecione a mola correspondente ao diâmetro do eletroduto</li>
+                        <li>Introduza a mola no eletroduto até coincidir com o trecho a ser curvado</li>
+                        <li>Aqueça o trecho com soprador térmico em movimentos giratórios</li>
+                        <li>Inicie a curvatura até obter a forma desejada, controlando com gabarito</li>
+                        <li>Esfrie a zona curvada com estopa molhada ou borrifador</li>
+                        <li>Retire a mola</li>
+                    </ul>
+                    
+                    <div class="warning">
+                        <strong>Atenção:</strong><br>
+                        • Evite a queima, redução da bitola e frizamentos no trecho da curva<br>
+                        • Execute a curvatura mantendo o raio igual ao longo de toda a curva
+                    </div>
+                `
+            },
+            {
+                numero: "04",
+                titulo: "Montagem de Canaletas PVC",
+                descricao: "Montagem de redes de canaletas de PVC",
+                detalhes: `
+                    <h3>PT Nº 04 - MONTAGEM DE REDES DE CANALETAS DE PVC</h3>
+                    
+                    <h4>Procedimento:</h4>
+                    <ul>
+                        <li>Marque no box os pontos de corte "x" a "x5"</li>
+                        <li>Trace linhas horizontais e verticais paralelas</li>
+                        <li>Corte as canaletas "A" e "B" maiores em 20 cm</li>
+                        <li>Posicione e marque as canaletas conforme pontos demarcados</li>
+                        <li>Corte as canaletas conforme marcações</li>
+                        <li>Fixe as canaletas com fita adesiva dupla face</li>
+                        <li>Sobreponha e fixe com parafusos autoperfurantes 4,2 x 13mm</li>
+                    </ul>
+                    
+                    <div class="tolerancias">
+                        <strong>Tolerâncias:</strong><br>
+                        • Medidas < 500mm: ±2mm<br>
+                        • Medidas > 500mm: ±3mm<br>
+                        • Entre junções: Folga máxima de 0,8mm<br>
+                        • Nível e prumo: Dentro da marcação
+                    </div>
+                `
+            },
+            {
+                numero: "05",
+                titulo: "Furações do Quadro de Comando",
+                descricao: "Furação da parte traseira, flange e porta do quadro",
+                detalhes: `
+                    <h3>PT Nº 05 - FURAÇÕES DO QUADRO DE COMANDO</h3>
+                    
+                    <h4>5.1 FURAÇÃO DA PARTE TRASEIRA</h4>
+                    <ul>
+                        <li>Retire o chassi do quadro de comando</li>
+                        <li>Marque os pontos de fixação do quadro</li>
+                        <li>Puncione as marcações e fure com broca guia de 3,5mm e depois com broca de 5mm</li>
+                    </ul>
+                    
+                    <h4>5.2 FURAÇÃO DO FLANGE PARA PRENSA CABOS</h4>
+                    <ul>
+                        <li>Marque os pontos de furação sobre fita adesiva</li>
+                        <li>Calcule o espaçamento: (Comprimento - Σ diâmetros) ÷ nº espaços</li>
+                        <li>Puncione e fure com broca guia de 3,5mm</li>
+                        <li>Execute furos com serra copo bimetálica</li>
+                        <li>Mantenha lubrificação com óleo de corte</li>
+                        <li>Remova rebarbas com lima meia cana tipo murça de 6"</li>
+                    </ul>
+                    
+                    <h4>5.3 FURAÇÃO DA PORTA</h4>
+                    <ul>
+                        <li>Marque pontos sobre fita adesiva</li>
+                        <li>Calcule espaçamento para dispositivos de comando</li>
+                        <li>Execute furos com serra copo bimetálica</li>
+                        <li>Limpe interior com trincha e imã envolvido em plástico</li>
+                    </ul>
+                `
+            },
+            {
+                numero: "06",
+                titulo: "Montagem do Quadro de Comando",
+                descricao: "Montagem completa do chassi e porta do quadro",
+                detalhes: `
+                    <h3>PT Nº 06 - MONTAGEM DE QUADRO DE COMANDO</h3>
+                    
+                    <h4>6.1 CORTE DAS CANALETAS</h4>
+                    <ul>
+                        <li>Retire o chassi do quadro de comando</li>
+                        <li>Reproduza no chassi o layout de montagem</li>
+                        <li>Meça e corte as canaletas conforme layout</li>
+                        <li>Remova rebarbas com canivete (não use estilete)</li>
+                    </ul>
+                    
+                    <h4>6.2 CORTE DOS TRILHOS</h4>
+                    <ul>
+                        <li>Meça e corte os trilhos conforme layout</li>
+                        <li>Remova rebarbas com lima murça de 6"</li>
+                    </ul>
+                    
+                    <h4>6.3 FIXAÇÃO</h4>
+                    <ul>
+                        <li>Coloque chassi sobre base de madeira</li>
+                        <li>Fixe com fita adesiva dupla face</li>
+                        <li>Puncione pontos de fixação</li>
+                        <li>Fure com broca 3,3mm para rebite pop 12 x 3,2mm</li>
+                    </ul>
+                    
+                    <h4>6.4 MONTAGEM DA RÉGUA E DISPOSITIVOS</h4>
+                    <ul>
+                        <li>Encaixe bornes e dispositivos nos trilhos</li>
+                        <li>Identifique com marcadores apropriados</li>
+                        <li>Execute fiação dos circuitos</li>
+                        <li>Crimpe terminais adequadamente</li>
+                    </ul>
+                `
+            },
+            {
+                numero: "07",
+                titulo: "Emenda Rabo de Rato",
+                descricao: "Emenda entre condutores tipo rabo de rato",
+                detalhes: `
+                    <h3>PT Nº 07 - EMENDA ENTRE CONDUTORES TIPO RABO DE RATO</h3>
+                    
+                    <h4>Procedimento:</h4>
+                    <ul>
+                        <li>Remova a isolação das extremidades dos condutores conforme tabela</li>
+                        <li>Inicie a emenda entrelaçando os condutores a partir do isolamento</li>
+                        <li>Torça os condutores com auxílio dos dedos por 3 ou 4 voltas</li>
+                        <li>Continue torcendo com auxílio de alicate universal</li>
+                        <li>Corte os excessos de pontas e acerte a emenda</li>
+                        <li>Terminada a torção, dobre a emenda ao meio</li>
+                    </ul>
+                    
+                    <div class="tolerancias">
+                        <strong>Comprimento da emenda:</strong><br>
+                        • 1,5 mm² = 5 cm<br>
+                        • 2,5 mm² = 6 cm<br>
+                        • 4 mm² = 8 cm<br>
+                        • 6 mm² = 10 cm
+                    </div>
+                `
+            },
+            {
+                numero: "08",
+                titulo: "Emenda em Prosseguimento",
+                descricao: "Emenda entre condutores tipo prosseguimento",
+                detalhes: `
+                    <h3>PT Nº 08 - EMENDA DE CONDUTORES EM PROSSEGUIMENTO</h3>
+                    
+                    <h4>Procedimento:</h4>
+                    <ul>
+                        <li>Remova a isolação das extremidades conforme tabela</li>
+                        <li>Inicie a emenda entrelaçando os condutores a ±2 cm do isolamento</li>
+                        <li>Segure um dos lados e torça o outro no sentido horário</li>
+                        <li>Finalize a torção com auxílio de alicate</li>
+                        <li>Mantenha a emenda presa ao alicate e torça o outro lado no sentido anti-horário</li>
+                        <li>Finalize com auxílio de segundo alicate</li>
+                    </ul>
+                    
+                    <div class="tolerancias">
+                        <strong>Comprimento da emenda:</strong><br>
+                        • 1,5 mm² = 5 cm<br>
+                        • 2,5 mm² = 6 cm<br>
+                        • 4 mm² = 8 cm<br>
+                        • 6 mm² = 10 cm
+                    </div>
+                `
+            },
+            {
+                numero: "09",
+                titulo: "Emenda em Derivação",
+                descricao: "Emenda entre condutores tipo derivação",
+                detalhes: `
+                    <h3>PT Nº 09 - EMENDA DE CONDUTORES EM DERIVAÇÃO</h3>
+                    
+                    <h4>Procedimento:</h4>
+                    <ul>
+                        <li>Remova a isolação das extremidades conforme tabela</li>
+                        <li>Retire o isolamento do condutor onde será feita a derivação</li>
+                        <li>Introduza o condutor a ser derivado no ponto do condutor principal</li>
+                        <li>Feche o ponto de derivação</li>
+                        <li>Iguale as capas dos condutores</li>
+                        <li>Torça o condutor a ser derivado no sentido horário</li>
+                        <li>Finalize a torção com auxílio de dois alicates</li>
+                    </ul>
+                    
+                    <div class="tolerancias">
+                        <strong>Comprimento da emenda:</strong><br>
+                        • 1,5 mm² = 5 cm<br>
+                        • 2,5 mm² = 6 cm<br>
+                        • 4 mm² = 8 cm<br>
+                        • 6 mm² = 10 cm
+                    </div>
+                `
+            },
+            {
+                numero: "10",
+                titulo: "Isolação com Fita Isolante",
+                descricao: "Isolação de emendas com fita isolante",
+                detalhes: `
+                    <h3>PT Nº 10 - ISOLAÇÃO DE EMENDAS COM FITA ISOLANTE</h3>
+                    
+                    <h4>Procedimento:</h4>
+                    <ul>
+                        <li>Inicie o isolamento prendendo a fita à isolação do condutor</li>
+                        <li>Aplique camadas em meia sobreposição alongando a fita em 50%</li>
+                        <li>Na primeira camada ultrapasse o final da emenda em duas voltas</li>
+                        <li>Dobre a fita e retorne com a isolação</li>
+                        <li>Termine a isolação com sobreposição de 3 voltas sobre a própria fita sem alongá-la</li>
+                        <li>Corte a fita com auxílio de canivete</li>
+                    </ul>
+                    
+                    <div class="tolerancias">
+                        <strong>Recomendações do fabricante:</strong><br>
+                        • 4 camadas - fita 3M Imperial<br>
+                        • 3 camadas - fita 3M Highland<br>
+                        • 2 camadas - fita 3M Scotch MR 33
+                    </div>
+                `
+            },
+            {
+                numero: "11",
+                titulo: "Instalação de Circuitos Terminais",
+                descricao: "Enfiação e instalação de circuitos terminais",
+                detalhes: `
+                    <h3>PT Nº 11 - INSTALAÇÃO DE CIRCUITOS TERMINAIS</h3>
+                    
+                    <h4>11.1 ENFIAÇÃO DOS CONDUTORES</h4>
+                    <ul>
+                        <li>Passe a fita guia na tubulação do circuito</li>
+                        <li>Remova a isolação da extremidade em aproximadamente 10 cm</li>
+                        <li>Introduza as pontas dos condutores na argola da fita guia</li>
+                        <li>Dobre-os em tamanhos diferenciados entre si</li>
+                        <li>Isole a amarração</li>
+                        <li>Identifique os condutores em suas duas extremidades</li>
+                        <li>Lubrifique a amarração com talco ou lubrificante específico</li>
+                        <li>Proveja ±20 cm de sobra nas caixas de passagem</li>
+                    </ul>
+                    
+                    <h4>11.2 CODIFICAÇÃO DE CORES</h4>
+                    <div class="tolerancias">
+                        <strong>Cores dos condutores:</strong><br>
+                        • NEUTRO: Azul-claro<br>
+                        • PE: Verde ou Verde-amarelo<br>
+                        • PEN: Azul-claro com anilhas verde-amarelas<br>
+                        • FASE: Vermelho, Branco ou Preto<br>
+                        • RETORNO: Amarelo, Cinza ou Lilás
+                    </div>
+                    
+                    <div class="warning">
+                        <strong>Importante:</strong><br>
+                        • Crimpe terminais adequadamente (sem cobre exposto)<br>
+                        • É vedada a aplicação de solda a estanho (NBR5410)<br>
+                        • Instale neutro na rosca dos receptáculos<br>
+                        • Conecte PE às partes metálicas com parafusos e arruelas
+                    </div>
+                `
+            }
+        ];
+        
+        // Função para criar cards dos procedimentos
+        function criarProcedimentoCards() {
+            const grid = document.getElementById('procedimentosGrid');
+            
+            procedimentos.forEach(proc => {
+                const card = document.createElement('div');
+                card.className = 'procedimento-card';
+                card.onclick = () => abrirModal(proc);
+                
+                card.innerHTML = `
+                    <div class="procedimento-number">${proc.numero}</div>
+                    <div class="procedimento-title">${proc.titulo}</div>
+                    <div class="procedimento-desc">${proc.descricao}</div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+        
+        // Função para abrir modal
+        function abrirModal(procedimento) {
+            const modal = document.getElementById('procedimentoModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalContent.innerHTML = procedimento.detalhes;
+            modal.style.display = 'block';
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            criarProcedimentoCards();
+            
+            // Fechar modal
+            const span = document.getElementsByClassName('close')[0];
+            const modal = document.getElementById('procedimentoModal');
+            
+            span.onclick = function() {
+                modal.style.display = 'none';
+            }
+            
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
