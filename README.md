@@ -92,41 +92,6 @@ olimpiadas-senai-dashboard/
 └── README.md          # Documentação
 ```
 
-## 🌐 Hospedagem no GitHub Pages
-
-### Passo a passo:
-
-1. **Criar repositório no GitHub**
-   ```bash
-   # Criar novo repositório público
-   # Nome sugerido: olimpiadas-senai-dashboard
-   ```
-
-2. **Upload dos arquivos**
-   - Faça upload de todos os arquivos (`index.html`, `style.css`, `script.js`)
-   - Certifique-se de que o `index.html` está na raiz do repositório
-
-3. **Ativar GitHub Pages**
-   - Vá em Settings → Pages
-   - Source: Deploy from a branch
-   - Branch: main (ou master)
-   - Folder: / (root)
-   - Clique em Save
-
-4. **Acessar o site**
-   - URL será: `https://[seu-usuario].github.io/olimpiadas-senai-dashboard/`
-   - Aguarde alguns minutos para propagação
-
-### Comandos Git (opcional):
-```bash
-git clone https://github.com/[seu-usuario]/olimpiadas-senai-dashboard.git
-cd olimpiadas-senai-dashboard
-# Adicione os arquivos
-git add .
-git commit -m "Adicionar dashboard olimpíadas SENAI"
-git push origin main
-```
-
 ## 🔧 Configurações Avançadas
 
 ### Personalização de Tarefas
